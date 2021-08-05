@@ -48,7 +48,7 @@ public class TestSelenium {
         driver.quit();
     }
 
-    @Test(priority = 1)
+    @Test()
     public void addIphoneToCart() {
         homePage.goToIndexPage();
         homePage.clickPhoneCategory();
@@ -56,10 +56,11 @@ public class TestSelenium {
         selectProductPage.chooseSomePhone();
         productPage.clickBuyButton();
         cartPage.closeCartPage();
+        clearCart();
     }
 
-    @Test(priority = 2)
-    public void checkCart() {
+    @Test()
+    public void clearCart() {
         homePage.clickCartButton();
         cartPage.checkCart();
         if(cartPage.cartIsEmpty()) {
@@ -73,18 +74,20 @@ public class TestSelenium {
     }
 
 
-    @Test(priority = 3)
+    @Test()
     public void addHpNotebookToCart() {
+        homePage.goToIndexPage();
         homePage.clickSearchField();
         homePage.inputSearchField("hp envy");
         selectProductPage.chooseSomeNoteBook();
         productPage.clickBuyButton();
         cartPage.closeCartPage();
-        checkCart();
+        clearCart();
     }
 
     @Test()
     public void checkInfo() {
+        homePage.goToIndexPage();
         homePage.clickContactsButton();
         infoPage.clickQuestionAnswer();
         infoPage.clickCredit();
