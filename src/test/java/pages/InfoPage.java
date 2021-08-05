@@ -18,19 +18,19 @@ public class InfoPage {
     }
 
     @FindBy(xpath = "//nav/ul/li[1]/a")
-    public WebElement questionsAnswers;
+    private WebElement questionsAnswers;
 
     @FindBy(xpath = "//nav/ul/li[2]/a")
-    public WebElement credit;
+    private WebElement credit;
 
     @FindBy(xpath = "//nav/ul/li[3]/a")
-    public WebElement deliveryPayment;
+    private WebElement deliveryPayment;
 
     @FindBy(xpath = "//nav/ul/li[7]/a")
-    public WebElement cooperation;
+    private WebElement cooperation;
 
     @FindBy(xpath = "//nav/ul/li[8]/a")
-    public WebElement vacancies;
+    private WebElement vacancies;
 
     public void clickQuestionAnswer() {
         wait.until(ExpectedConditions.elementToBeClickable(questionsAnswers));

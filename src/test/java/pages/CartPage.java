@@ -18,16 +18,16 @@ public class CartPage {
     }
 
     @FindBy(css = "div.modal__header > button")
-    public WebElement modalWindow;
+    private WebElement modalWindow;
 
     @FindBy(xpath = "//single-modal-window/div[2]/div[2]")
-    public WebElement checkCart;
+    private WebElement checkCart;
 
     @FindBy(id = "cartProductActions0")
-    public WebElement contextMenuAtCart;
+    private WebElement contextMenuAtCart;
 
     @FindBy(css = "#cartProductActions0 > li:nth-child(1) > rz-trash-icon > button")
-    public WebElement deleteFromCart;
+    private WebElement deleteFromCart;
 
     public boolean cartIsEmpty() {
         return getTextFromCart().contains("Корзина пуста");
