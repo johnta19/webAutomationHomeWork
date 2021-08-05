@@ -1,5 +1,6 @@
 package pages;
 
+import CustomWait.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -19,27 +20,46 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
+    private String url = "https://rozetka.com.ua/";
+    private String homeTitle = "Интернет-магазин ROZETKA™: официальный сайт самого популярного онлайн-гипермаркета в Украине";
+
     @FindBy(xpath = "//sidebar-fat-menu/div/ul/li[2]/a")
-    public WebElement phonesCategory;
+    private WebElement phonesCategory;
 
     @FindBy(className = "search-form__input")
-    public WebElement searchField;
+    private WebElement searchField;
 
     @FindBy(xpath = "//a[@href=\"https://rozetka.com.ua/contacts/\"]")
-    public WebElement contactsButton;
+    private WebElement contactsButton;
 
     @FindBy(xpath = "//rz-cart[@class=\"header-actions__component\"]")
-    public WebElement cartButton;
+    private WebElement cartButton;
 
     @FindBy(className = "header__logo")
-    public WebElement indexPage;
+    private WebElement indexPage;
+
+    private By titleLocator = By.xpath("//sidebar-fat-menu/div/ul");
+
+    private By resultLocator = By.xpath("(//li[2]/a)[4]");
+
+    public void clickPhoneCategoryCustomWait() {
+        WebElement titleLink = wait.until(new ResultField(resultLocator, titleLocator));
+        titleLink.click();
+    }
+
+    public void checkUrl() {
+        if (!wait.until(new PageLoaded(homeTitle, url))) {
+            throw new RuntimeException("home page is not displayed");
+        }
+    }
 
     public void clickPhoneCategory() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//sidebar-fat-menu/div/ul/li[2]/a")));
         phonesCategory.click();
     }
 
     public void clickSearchField() {
-        wait.until(ExpectedConditions.elementToBeClickable(searchField));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("search-form__input")));
         searchField.click();
     }
 

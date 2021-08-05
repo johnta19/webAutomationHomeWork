@@ -18,7 +18,7 @@ public class SelectSubcategoryPage {
     }
 
     @FindBy(xpath = "//span[@class='popular-category__title'][1]")
-    public WebElement appleCategory;
+    private WebElement appleCategory;
 
     public void clickAppleCategory() {
         wait.until(ExpectedConditions.elementToBeClickable(appleCategory));

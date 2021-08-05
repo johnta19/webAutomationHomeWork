@@ -4,6 +4,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import pages.*;
+
 import java.util.concurrent.TimeUnit;
 
 public class TestSelenium {
@@ -23,7 +24,7 @@ public class TestSelenium {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 20);
         actions = new Actions(driver);
         homePage = new HomePage(driver, wait);
         selectSubcategoryPage = new SelectSubcategoryPage(driver, wait);
@@ -39,8 +40,9 @@ public class TestSelenium {
     }
 
     @BeforeClass
-    public void beforeTest() {
+    public void goToUrl() {
         driver.get(url);
+        homePage.checkUrl();
     }
 
     @AfterClass
@@ -51,7 +53,7 @@ public class TestSelenium {
     @Test()
     public void addIphoneToCart() {
         homePage.goToIndexPage();
-        homePage.clickPhoneCategory();
+        homePage.clickPhoneCategoryCustomWait();
         selectSubcategoryPage.clickAppleCategory();
         selectProductPage.chooseSomePhone();
         productPage.clickBuyButton();
@@ -63,10 +65,9 @@ public class TestSelenium {
     public void clearCart() {
         homePage.clickCartButton();
         cartPage.checkCart();
-        if(cartPage.cartIsEmpty()) {
+        if (cartPage.cartIsEmpty()) {
             cartPage.closeCartPage();
-        }
-        else {
+        } else {
             cartPage.clickContextMenuAtCart();
             cartPage.deleteProductFromCart();
             cartPage.closeCartPage();
